@@ -1,38 +1,51 @@
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import { auth, db } from "../config/firebase.config";
 
 /**
- * Check if a college is registered before allowing registration/login.
+ * Check if a college exists before login/registration
+ * @param {string} collegeName
+ * @param {string} email
+ * @returns {boolean}
  */
 export const isCollegeRegistered = async (collegeName, email) => {
-  const collegeRef = doc(db, "registeredColleges", collegeName); // Changed collection name
-  const collegeSnap = await getDoc(collegeRef);
+    console.log("Checking College:", { collegeName, email });
+  
+    const collegeRef = doc(db, "colleges", collegeName);
+    const collegeSnap = await getDoc(collegeRef);
+  
+    if (!collegeSnap.exists()) {
+      console.log("College not found in Firestore.");
+      return false;
+    }
+  
+    const collegeData = collegeSnap.data();
+    console.log("Firestore Data:", collegeData);
 
-  if (collegeSnap.exists() && collegeSnap.data().collegeEmail === email) { // Changed variable name
-    return true;
-  }
-  return false;
-};
+    console.log(collegeData.email)
+  
+    return collegeData.email === email;
+  };
+  
 
 /**
- * Register a college user with email & password.
+ * Register a new college user
+ * @param {Object} data - Registration data
  */
 export const registerCollegeUser = async ({ collegeName, email, password }) => {
-  // Verify if the college exists before registering
+  // Check if the college is already registered
   const collegeExists = await isCollegeRegistered(collegeName, email);
-  if (!collegeExists) {
-    throw new Error("College not found or email does not match records.");
+  if (collegeExists) {
+    throw new Error("College already registered with this email.");
   }
 
-  // Create a Firebase Auth user
   const userCredential = await createUserWithEmailAndPassword(auth, email, password);
   const user = userCredential.user;
 
-  // Store user details in Firestore under "collegeUsers"
-  await setDoc(doc(db, "collegeAuthUsers", user.uid), {  // Changed collection name
+  // Store user data in Firestore under "colleges" collection
+  await setDoc(doc(db, "colleges", collegeName), {
     collegeName,
-    collegeEmail: email,  // Changed variable name
+    email,
     uid: user.uid,
   });
 
@@ -40,7 +53,9 @@ export const registerCollegeUser = async ({ collegeName, email, password }) => {
 };
 
 /**
- * Login a college user with email & password.
+ * Login a college user
+ * @param {string} email
+ * @param {string} password
  */
 export const loginCollegeUser = async (email, password) => {
   const userCredential = await signInWithEmailAndPassword(auth, email, password);
