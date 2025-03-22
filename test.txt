@@ -1,0 +1,41 @@
+{
+  "branch": "CSE",
+  "year": "3",
+  "semester": "1",
+  "sections": "4",
+  "facultyCount": "15",
+  "subjects": "8",
+  "labSubjects": "2",
+  "no.of.periodsForLab": "3",
+  "totalPeriods": "6",
+  "periodDuration": "60",
+  "faculty": [
+    { "name": "Dr. John Doe", "specialization": ["DBMS", "Cloud Computing", "Big Data"] },
+    { "name": "Prof. Jane Smith", "specialization": ["AI", "Machine Learning", "Deep Learning"] },
+    { "name": "Mr. Alan Brown", "specialization": ["Software Engineering", "Cyber Security"] },
+    { "name": "Dr. Robert White", "specialization": ["Data Structures", "Algorithms"] },
+    { "name": "Ms. Emma Johnson", "specialization": ["Operating Systems", "Computer Networks"] },
+    { "name": "Dr. Olivia Williams", "specialization": ["IoT", "Embedded Systems"] },
+    { "name": "Prof. Liam Taylor", "specialization": ["Computer Vision", "Image Processing"] },
+    { "name": "Dr. Sophia Martinez", "specialization": ["Blockchain", "Cryptography"] },
+    { "name": "Mr. Ethan Thomas", "specialization": ["Full Stack Development", "ReactJS", "NodeJS"] },
+    { "name": "Ms. Ava Garcia", "specialization": ["Cyber Forensics", "Network Security"] },
+    { "name": "Dr. Noah Lee", "specialization": ["Database Administration", "SQL Optimization"] },
+    { "name": "Prof. Isabella Wilson", "specialization": ["Cloud Security", "DevOps"] },
+    { "name": "Mr. Mason Harris", "specialization": ["HCI", "UX/UI Design"] },
+    { "name": "Dr. Lucas Clark", "specialization": ["Wireless Networks", "Mobile Computing"] },
+    { "name": "Ms. Mia Rodriguez", "specialization": ["AI Ethics", "Natural Language Processing"] }
+  ],
+  "subjectsData": [
+    { "name": "DevOps", "faculty": "Prof. Isabella Wilson" },
+    { "name": "Compiler Design", "faculty": "Dr. John Doe" },
+    { "name": "Machine Learning", "faculty": "Prof. Jane Smith" },
+    { "name": "Full Stack Development", "faculty": "Mr. Ethan Thomas" },
+    { "name": "Internet of Things", "faculty": "Dr. Olivia Williams" },
+    { "name": "Environmental Impact Assessment", "faculty": "Ms. Ava Garcia" },
+    { "name": "Mandatory Course (IPR)", "faculty": "" },
+    { "name": "Software Engineering", "faculty": "Mr. Alan Brown" },
+    { "name": "DevOps Lab", "faculty": "Prof. Isabella Wilson" },
+    { "name": "Machine Learning Lab", "faculty": "Prof. Jane Smith / Mr. Ethan Thomas" }
+  ]
+}
